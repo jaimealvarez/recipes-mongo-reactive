@@ -44,14 +44,15 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Mono<RecipeCommand> findCommandById(String id) {
-        return recipeRepository.findById(id)
+        Mono<RecipeCommand> recipeCommandMono = recipeRepository.findById(id)
                 .map(recipe -> {
-                            RecipeCommand command = recipeToRecipeCommand.convert(recipe);
-                            command.getIngredients().forEach(rc -> {
-                                rc.setRecipeId(command.getId());
-                            });
+                    RecipeCommand command = recipeToRecipeCommand.convert(recipe);
+                    command.getIngredients().forEach(rc -> {
+                        rc.setRecipeId(command.getId());
+                    });
                     return command;
                 });
+        return recipeCommandMono;
     }
 
     @Override

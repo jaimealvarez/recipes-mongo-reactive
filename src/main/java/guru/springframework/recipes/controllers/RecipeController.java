@@ -1,15 +1,15 @@
 package guru.springframework.recipes.controllers;
 
 import guru.springframework.recipes.commands.RecipeCommand;
-import guru.springframework.recipes.exceptions.NotFoundException;
 import guru.springframework.recipes.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
@@ -25,7 +25,7 @@ public class RecipeController {
 
     @GetMapping("recipe/{id}/show")
     public String getRecipe(@PathVariable String id, Model model) {
-        model.addAttribute("recipe", recipeService.findById(id).block());
+        model.addAttribute("recipe", recipeService.findById(id));
         return "recipe/show";
     }
 
@@ -37,7 +37,7 @@ public class RecipeController {
 
     @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model) {
-        model.addAttribute("recipe", recipeService.findCommandById(id).block());
+        model.addAttribute("recipe", recipeService.findCommandById(id));
         return "recipe/recipeform";
     }
 
@@ -61,6 +61,7 @@ public class RecipeController {
         return "redirect:/";
     }
 
+/*
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception exception) {
@@ -69,4 +70,5 @@ public class RecipeController {
         modelAndView.addObject("exception", exception);
         return modelAndView;
     }
+*/
 }

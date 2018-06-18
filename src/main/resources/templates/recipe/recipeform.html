@@ -145,7 +145,7 @@
                                         </li>
                                     </ul>
                                     <div th:each="ingredientEach, idx : ${recipe.ingredients}" >
-                                        <input  type="hidden" th:field="*{ingredients[__${idx.index}__].id}" />
+                                        <!--<input  type="hidden" th:field="*{ingredients[__${idx.index}__].id}" />-->
                                         <input  type="hidden" th:field="*{ingredients[__${idx.index}__].description}" />
                                         <input  type="hidden" th:field="*{ingredients[__${idx.index}__].amount}" />
                                         <input  type="hidden" th:field="*{ingredients[__${idx.index}__].unitOfMeasure.id}" />
